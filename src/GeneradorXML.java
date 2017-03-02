@@ -1,14 +1,9 @@
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -21,7 +16,7 @@ import org.w3c.dom.Text;
 * Created by x3727349s on 02/03/17.
 */
 public class GeneradorXML {
-
+    //falta L'hora en que s'ha realitzat l'operació, la IP
     public static void pasarDatos(String operacionRes, String resultadoRes){
         String fitxero = "registro";
         ArrayList operacion = new ArrayList();
@@ -41,7 +36,8 @@ public class GeneradorXML {
             System.out.println("Error ArrayList vacio");
             return;
         }else{
-
+         //para no sobreescribir los DATOS
+        //http://docs.oracle.com/javase/1.5.0/docs/api/java/io/FileOutputStream.html#FileOutputStream%28java.io.File,%20boolean
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             DOMImplementation implementation = builder.getDOMImplementation();

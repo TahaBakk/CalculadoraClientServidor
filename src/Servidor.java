@@ -13,7 +13,7 @@ public class Servidor {
 
         ServerSocket serverSocket = new ServerSocket();
         System.out.println("Realizando el vinculo");
-        InetSocketAddress addr = new InetSocketAddress("localhost",5505);
+        InetSocketAddress addr = new InetSocketAddress("localhost",5540);
         serverSocket.bind(addr);
 
         System.out.println("Aceptando conexiones");

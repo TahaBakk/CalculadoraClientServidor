@@ -43,7 +43,7 @@ public class SocketCliente {
 
                     try {
                         Socket cliente = new Socket();
-                        InetSocketAddress addr = new InetSocketAddress("localhost", 5505);
+                        InetSocketAddress addr = new InetSocketAddress("localhost", 5540);
                         cliente.connect(addr);
                         InputStream is = cliente.getInputStream();
                         OutputStream os = cliente.getOutputStream();

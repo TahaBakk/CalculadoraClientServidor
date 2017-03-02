@@ -9,6 +9,7 @@ import java.net.Socket;
 public class HiloPeticion extends Thread{
 
     private Socket socket;
+    GeneradorXML gxml = new GeneradorXML();
 
 
     public HiloPeticion() {
@@ -23,7 +24,7 @@ public class HiloPeticion extends Thread{
             is = socket.getInputStream();//recibir
             OutputStream os = socket.getOutputStream();//enviar
 
-            byte[] mensaje = new byte[50];
+            byte[] mensaje = new byte[is.available()];
             is.read(mensaje);
 
             Double resposta = operacion(new String(mensaje));
@@ -31,6 +32,8 @@ public class HiloPeticion extends Thread{
             System.out.println("Mensaje recibido : "+ new String (mensaje));//mostramos el mensaje por la pantalla
 
             os.write(resposta2.getBytes());//enviamos la respuesta para mostrarla al cliente
+
+            gxml.pasarDatos(new String(mensaje), resposta2);
 
             System.out.println("Cerrando el socket");
             socket.close();
