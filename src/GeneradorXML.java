@@ -19,6 +19,9 @@ import org.w3c.dom.Text;
 public class GeneradorXML {
     //falta L'hora en que s'ha realitzat l'operació, la IP
     public static void pasarDatos(String operacionRes, String resultadoRes){
+
+        //leerObjetos();
+
         String fitxero = "registro";
         ArrayList operacion = new ArrayList();
         ArrayList resultado = new ArrayList();
