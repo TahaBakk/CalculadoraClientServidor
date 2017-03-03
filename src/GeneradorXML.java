@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +25,8 @@ public class GeneradorXML {
 
         operacion.add(operacionRes);
         resultado.add(resultadoRes);
+
+        guardarObjetos(operacion,resultado);
 
         try {
             generate(fitxero, operacion, resultado);
@@ -72,5 +75,33 @@ public class GeneradorXML {
             transformer.transform(source, result);
         }
     }
+
+
+    public static void guardarObjetos(ArrayList operacion,ArrayList resultado){
+
+        try {
+            ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream("informacionRegistros.obj"));
+            salida.writeObject(operacion);
+            salida.writeObject(resultado);
+            salida.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void leerObjetos(ArrayList operacion,ArrayList resultado) {
+
+
+    /*ObjectInputStream entrada=new ObjectInputStream(new FileInputStream("media.obj"));
+    String str=(String)entrada.readObject();
+    Lista obj1=(Lista)entrada.readObject();
+      System.out.println("Valor medio "+obj1.valorMedio());
+      System.out.println("-----------------------------");
+      System.out.println(str+obj1);
+      System.out.println("-----------------------------");
+      entrada.close();*/
+
+    }
+
 
 }

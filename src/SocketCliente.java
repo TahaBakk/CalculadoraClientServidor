@@ -58,7 +58,7 @@ public class SocketCliente {
 
 
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.out.println("Error numeros alfanumericos"+e);
                     }
 
                 }
