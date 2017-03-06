@@ -24,19 +24,6 @@ public class SocketCliente {
             System.out.println("----------------------------------");
             opcio = sc.nextInt();
                 if (opcio == 1) {
-                    /*System.out.println("Introduceme la operacion a realizar");
-                    System.out.println("----------------------------------");
-                    System.out.println("1.Sumar");
-                    System.out.println("2.Resta");
-                    System.out.println("3.Multiplicacio");
-                    System.out.println("4.Divisio");
-                    System.out.println("----------------------------------");*/
-                    //int operacion = sc.nextInt();
-
-                    /*System.out.println("Introduceme el primer valor a calcular ()");
-                    int valor1 = sc.nextInt();
-                    System.out.println("Introduceme el segundo valor a calcular ()");
-                    int valor2 = sc.nextInt();*/
 
                     System.out.println("introduceme la operacion a realizar:(ej 5+4)");
                     String operacion = sc2.nextLine();
@@ -63,6 +50,5 @@ public class SocketCliente {
 
                 }
         }while (opcio!=2);
-        //}
     }
 }

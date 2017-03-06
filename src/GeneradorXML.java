@@ -18,18 +18,23 @@ import org.w3c.dom.Text;
 */
 public class GeneradorXML {
     //falta L'hora en que s'ha realitzat l'operació, la IP
-    public static void pasarDatos(String operacionRes, String resultadoRes){
+
+    //public static ArrayList operacion = new ArrayList();
+    //public static ArrayList resultado = new ArrayList();
+    public static ArrayList operacion = cargarDatos(1);
+    public static ArrayList resultado = cargarDatos(2);
+
+    public static void pasarDatos(String operacionRes, String resultadoRes) throws IOException {
 
         //leerObjetos();
 
         String fitxero = "registro";
-        ArrayList operacion = new ArrayList();
-        ArrayList resultado = new ArrayList();
 
         operacion.add(operacionRes);
         resultado.add(resultadoRes);
 
-        guardarObjetos(operacion,resultado);
+        //guardarObjetos(operacion,resultado);
+        guardarDatos(operacion, resultado);
 
         try {
             generate(fitxero, operacion, resultado);
@@ -80,30 +85,52 @@ public class GeneradorXML {
     }
 
 
-    public static void guardarObjetos(ArrayList operacion,ArrayList resultado){
+    public static void guardarDatos(ArrayList operacion, ArrayList resultado) throws IOException {
 
-        try {
-            ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream("informacionRegistros.obj"));
-            salida.writeObject(operacion);
-            salida.writeObject(resultado);
-            salida.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            ObjectOutputStream ficheroOperacion = new ObjectOutputStream(new FileOutputStream("objetos/operacion.obj"));
+            ObjectOutputStream ficheroRespuesta = new ObjectOutputStream(new FileOutputStream("objetos/respuesta.obj"));
+
+            ficheroOperacion.writeObject(operacion);
+            ficheroRespuesta.writeObject(resultado);
+
+            ficheroOperacion.flush();
+            ficheroRespuesta.flush();
+
+            ficheroOperacion.close();
+            ficheroRespuesta.close();
+
+            System.out.println("Arraylist guardadas correctamente...");
     }
 
-    public static void leerObjetos(ArrayList operacion,ArrayList resultado) {
+    public static ArrayList cargarDatos(int opcion)  {
+        try {
+            ObjectInputStream ficheroOperacion = null;
+            ObjectInputStream ficheroRespuesta = null;
+
+            int opcionSwitch = opcion;
+            switch (opcionSwitch) {
+                case 1:
+                    ficheroOperacion = new ObjectInputStream(new FileInputStream("objetos/operacion.obj"));//Se le pasa el fitxero
+                    ArrayList operacion = (ArrayList)ficheroOperacion.readObject();//cargamos el objeto y lo guardamos en un arraylist
+                    return  operacion;//devolvemos el arraylist
+                case 2:
+                    ficheroRespuesta = new ObjectInputStream(new FileInputStream("objetos/respuesta.obj"));
+                    ArrayList resultado = (ArrayList)ficheroRespuesta.readObject();
+                    return resultado;
+
+                case 3: break;
+                case 4: break;
+                default:break;
+            }
+
+            ficheroOperacion.close();
+            ficheroRespuesta.close();
 
 
-    /*ObjectInputStream entrada=new ObjectInputStream(new FileInputStream("media.obj"));
-    String str=(String)entrada.readObject();
-    Lista obj1=(Lista)entrada.readObject();
-      System.out.println("Valor medio "+obj1.valorMedio());
-      System.out.println("-----------------------------");
-      System.out.println(str+obj1);
-      System.out.println("-----------------------------");
-      entrada.close();*/
-
+        }
+        catch (IOException e) {e.printStackTrace();}
+        catch (ClassNotFoundException e) {e.printStackTrace();}
+        return null;
     }
 
 

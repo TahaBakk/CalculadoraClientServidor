@@ -72,6 +72,10 @@ public class HiloPeticion extends Thread{
             return resultado;
         }
 
+        if (!operacion.contains("*") && operacion.contains("/") && operacion.contains("-") && operacion.contains("+")){
+            return Double.parseDouble(operacion);
+        }
+
         return resultado;
     }
 
