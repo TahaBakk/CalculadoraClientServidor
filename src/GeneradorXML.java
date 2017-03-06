@@ -26,6 +26,11 @@ public class GeneradorXML {
     public static ArrayList ip = cargarDatos(3);
     public static ArrayList fecha = cargarDatos(4);
 
+    /*public static ArrayList operacion = new ArrayList();
+    public static ArrayList resultado = new ArrayList();
+    public static ArrayList ip = new ArrayList();
+    public static ArrayList fecha = new ArrayList();*/
+
     public static void pasarDatos(String operacionRes, String resultadoRes) throws IOException {
         //fitxero xml
         String fitxero = "registro";
@@ -43,18 +48,17 @@ public class GeneradorXML {
         guardarDatos(operacion, resultado);
 
         try {
-            generate(fitxero, operacion, resultado);
+            generate(fitxero, operacion, resultado, ip, fecha);
         } catch (Exception e) {}
     }
 
-    public static void generate(String name, ArrayList<String> operacion,ArrayList<String> resultado) throws Exception{
+    public static void generate(String name, ArrayList<String> operacion,ArrayList<String> resultado,ArrayList<String> ip,ArrayList<String> fecha) throws Exception{
 
         if(operacion.isEmpty() || resultado.isEmpty() || operacion.size()!=resultado.size()){
             System.out.println("Error ArrayList vacio");
             return;
         }else{
          //para no sobreescribir los DATOS
-        //http://docs.oracle.com/javase/1.5.0/docs/api/java/io/FileOutputStream.html#FileOutputStream%28java.io.File,%20boolean
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             DOMImplementation implementation = builder.getDOMImplementation();
@@ -66,18 +70,28 @@ public class GeneradorXML {
             //Por cada key creamos un item que contendrá la key y el value
             for(int i=0; i<operacion.size();i++){
                 //Item Node
-                Element itemNode = document.createElement("data");
-                //Key Node
-                Element keyNode = document.createElement("operacion");
+                Element itemNode = document.createElement("data");//tag padre
+
+                Element keyNode = document.createElement("operacion");//tag hijo
                 Text nodeKeyValue = document.createTextNode(operacion.get(i));
                 keyNode.appendChild(nodeKeyValue);
-                //Value Node
                 Element valueNode = document.createElement("resultado");
                 Text nodeValueValue = document.createTextNode(resultado.get(i));
                 valueNode.appendChild(nodeValueValue);
+
+                Element valueNode2 = document.createElement("ip");
+                Text valueNodeIp = document.createTextNode(ip.get(i));
+                valueNode2.appendChild(valueNodeIp);
+
+                Element valueNode3 = document.createElement("fecha");
+                Text valueNodeFecha = document.createTextNode(fecha.get(i));
+                valueNode3.appendChild(valueNodeFecha);
+
                 //append keyNode and valueNode to itemNode
                 itemNode.appendChild(keyNode);
                 itemNode.appendChild(valueNode);
+                itemNode.appendChild(valueNode2);
+                itemNode.appendChild(valueNode3);
                 //append itemNode to raiz
                 raiz.appendChild(itemNode); //pegamos el elemento a la raiz "Documento"
             }
@@ -92,15 +106,15 @@ public class GeneradorXML {
 
     public static void guardarDatos(ArrayList operacion, ArrayList resultado) throws IOException {
 
-        ObjectOutputStream ficheroOperacion = new ObjectOutputStream(new FileOutputStream("objetos/operacion.obj"));
-        ObjectOutputStream ficheroRespuesta = new ObjectOutputStream(new FileOutputStream("objetos/respuesta.obj"));
-        ObjectOutputStream ficheroip = new ObjectOutputStream(new FileOutputStream("objetos/ip.obj"));
-        ObjectOutputStream ficherofecha = new ObjectOutputStream(new FileOutputStream("objetos/fecha.obj"));
+        ObjectOutputStream ficheroOperacion = new ObjectOutputStream(new FileOutputStream("objetos/operacion.obj",true));
+        ObjectOutputStream ficheroRespuesta = new ObjectOutputStream(new FileOutputStream("objetos/respuesta.obj",true));
+        ObjectOutputStream ficheroip = new ObjectOutputStream(new FileOutputStream("objetos/ip.obj",true));
+        ObjectOutputStream ficherofecha = new ObjectOutputStream(new FileOutputStream("objetos/fecha.obj",true));
         //Las guardamos
         ficheroOperacion.writeObject(operacion);
         ficheroRespuesta.writeObject(resultado);
-        ficheroip.writeObject(resultado);
-        ficherofecha.writeObject(resultado);
+        ficheroip.writeObject(ip);
+        ficherofecha.writeObject(fecha);
         //limpiamos
         ficheroOperacion.flush();
         ficheroRespuesta.flush();
@@ -144,7 +158,7 @@ public class GeneradorXML {
             ficheroRespuesta.close();
             ficheroIp.close();
             ficherofecha.close();
-            
+
         }
         catch (IOException e) {e.printStackTrace();}
         catch (ClassNotFoundException e) {e.printStackTrace();}

@@ -1,35 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <registro>
     <data>
-        <operacion>5+4</operacion>
-        <resultado>9.0</resultado>
+        <operacion>5+74</operacion>
+        <resultado>79.0</resultado>
+        <ip>79.0</ip>
+        <fecha>79.0</fecha>
     </data>
     <data>
-        <operacion>3-1</operacion>
-        <resultado>2.0</resultado>
+        <operacion>99+66</operacion>
+        <resultado>165.0</resultado>
+        <ip>localhost</ip>
+        <fecha>18:56:45 06/03/2017</fecha>
     </data>
     <data>
-        <operacion>4</operacion>
-        <resultado>0.0</resultado>
-    </data>
-    <data>
-        <operacion>5+5</operacion>
-        <resultado>10.0</resultado>
-    </data>
-    <data>
-        <operacion>4+5</operacion>
-        <resultado>9.0</resultado>
-    </data>
-    <data>
-        <operacion/>
-        <resultado>0.0</resultado>
-    </data>
-    <data>
-        <operacion>4+5</operacion>
-        <resultado>9.0</resultado>
-    </data>
-    <data>
-        <operacion>4+5</operacion>
-        <resultado>9.0</resultado>
+        <operacion>789+987</operacion>
+        <resultado>1776.0</resultado>
+        <ip>localhost</ip>
+        <fecha>18:57:24 06/03/2017</fecha>
     </data>
 </registro>
