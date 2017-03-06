@@ -8,12 +8,15 @@ import java.net.Socket;
  */
 public class Servidor {
 
+    public static String ip = "localhost";
+
     public static void main(String[] args) throws IOException {
+
         System.out.println("generando el servidor");
 
         ServerSocket serverSocket = new ServerSocket();
         System.out.println("Realizando el vinculo");
-        InetSocketAddress addr = new InetSocketAddress("localhost",5540);
+        InetSocketAddress addr = new InetSocketAddress(ip,5540);
         serverSocket.bind(addr);
 
         System.out.println("Aceptando conexiones");
